@@ -1,0 +1,67 @@
+﻿<style>
+    .logmsg {
+        white-space: pre;
+    }
+
+  
+    tr, th, tr td {
+        border: 1px solid #999 !important;
+        padding: 0.5rem;
+    }
+
+    
+</style>
+
+<section id="main-content">
+    <div class="space-30"></div>
+        <div class="container">
+            <div ng-controller="LogViewerController as table">
+                <h3>System Log Entry Screen</h3>
+                <h5>Search By Severity or Message: </h5>
+                <div style="display:inline-block; margin:10px">
+                    <input type="text" class="form-control" placeholder="Search" ng-model="table.criteria.filter" />
+
+                    Info <input type="checkbox" ng-model="table.criteria.info">
+
+                    Warning <input type="checkbox" ng-model="table.criteria.warning">
+
+                    Error <input type="checkbox" ng-model="table.criteria.error" />
+                    <button ng-click="table.searchedClicked()">Search</button>
+                </div>
+
+                <!-- BEGIN table -->
+                <div id="table-container">
+                    <div id="table-scroll" infinite-scroll="table.loadMore()" infinite-scroll-distance="2" infinte-scroll-disabled="table.busy">
+                        <table id="datatables-default" class="table table-striped table-condensed table-bordered bg-white">
+                            <thead id="tableHeader">
+                                <tr>
+                                    <th style="white-space: nowrap">USER ID</th>
+                                    <th style="white-space: nowrap">ID</th>
+                                    <th style="white-space: nowrap">DATETIME</th>
+                                    <th style="white-space: nowrap">SEVERITY</th>
+                                    <th style="white-space: nowrap">MESSAGE</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tbody">
+                                <tr ng-repeat="item in table.itemList ">
+                                    <td>{{item.userId}}</td>
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.dateCreated | formatDateWithTime}}</td>
+                                    <td>{{item.severity}}</td>
+                                    <td class="logmsg">{{item.message}}</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+
+                        <!--<pre>{{table | json}}</pre>-->
+                        <!-- END table -->
+                    </div>
+                </div>
+                <!-- END #content -->
+            </div>
+        </div>
+       
+</section>
+
