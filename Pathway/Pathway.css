@@ -1,0 +1,10 @@
+﻿#pathwayName {
+    font-size: 40px;
+    color: #333;
+}
+
+#pathwayContainer {
+    margin-top:40px; 
+    margin-left: 100px; 
+    padding-bottom: 50px;
+}

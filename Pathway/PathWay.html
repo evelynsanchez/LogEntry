@@ -1,0 +1,52 @@
+﻿<div class="divide40"></div>
+<div class="container col-md-12 row" id="pathwayContainer">
+    <div class="row col-md-8">
+        <div class="blog-post">
+            <div id="pathwayName">{{$ctrl.pathwayName}}:</div>
+            <div class="divide20"></div>
+            <ui-view>
+
+                </ui-view>
+            </div><!--blog post-->
+            <div class="col-md-12" ng-if="$ctrl.$state.is('PathWayScreen')">
+                <content-item content-id="$ctrl.coverImage" class="fullSize" />
+                Description:
+                {{$ctrl.description}}
+            </div>
+            <ul class="pager"></ul>
+            <!--button is here-->
+            <!--pager-->
+        </div><!--col-->
+        <div class="col-md-4">
+            <div class="sidebar-box margin40">
+            </div>
+            <div class="sidebar-box margin40">
+                <div class="col-md-12 row">
+                    <h4>Content</h4>
+                    <div class="list-unstyled cat-list">
+                        <ul>
+                            <li ng-repeat="item in $ctrl.items" class="col-md-10">
+                                <a ui-sref="PathWayScreen.content({contentId: item.contentItemId })">
+                                    Name : {{item.contentName}}
+                                    level:  {{item.level}}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div><!--sidebar-box-->         
+            </div><!--sidebar-col-->
+        </div><!--row for blog post-->
+    <script type="text/ng-template" id="/content.html" class="col-md-12">
+        <h2>{{$ctrl.contentInfo.contentTitle}}</h2>
+            <content-item content-id="$ctrl.contentItemId" get-content-info="$ctrl.contentInfo = info" class="fullSize"/>
+        <div class="row col-md-12">
+            <likes-widget content-id='$ctrl.contentItemId' content-type="$ctrl.contentInfo.contentType" class="col-md-2" />
+            <bookmark-toggle content-id="$ctrl.contentItemId" class="col-md-2 col-md-offset-6"/>
+        </div>
+        <div class="row col-md-12">
+            <button type="button" class="previous col-md-2" ng-click="$ctrl.previous()" ng-if="$ctrl.showPrevious">Previous</button>
+            <button type="button" class="next col-md-2 col-md-offset-5" ng-click="$ctrl.next()" ng-if="$ctrl.showNext">Next</button>
+        </div>       
+        <comment-tree content-item-id="$ctrl.contentItemId" class="col-md-9" style="margin-top:60px;"  />     
+    </script>
+</div>
